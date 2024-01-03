@@ -1,2 +1,2 @@
-def input_student():
+def input_course():
 
