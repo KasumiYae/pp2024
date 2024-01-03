@@ -9,6 +9,6 @@ Students are expected to:
 Student Info
 =========================
 
-* Student Name: Luyen PHam Ngoc Khanh 
+* Student Name: Luyen Pham Ngoc Khanh 
 * Student ID: BA12-093
 
