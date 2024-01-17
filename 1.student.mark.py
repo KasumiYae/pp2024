@@ -33,9 +33,9 @@ def input_mark (course_id):
         return 
     
     for stu in student :
-        mark_count = float(input("input mark for student {stu[1]} in course {course_id}"))
-        mark.append(course_id , stu , mark_count)
-
+        mark_count = float(input(f"input mark for student {stu[1]} in course {course_id}"))
+        mark.append([course_id , stu , mark_count])
+        return mark_count
 
 def list_courses ():
     for couses_1 in courses :
@@ -51,7 +51,13 @@ def show_students_with_cousrses (courses ):
         if score[0] == courses : 
             print(f"student {mark[1]}  get score {mark[2]} in couses number {mark[0]} ")
 
-
+def show_marks_for_course(course_id):
+    for score in mark:
+        course_id_score, student_info, student_mark = score
+        if course_id_score == course_id:
+            student_id, student_name, student_dob = student_info
+            print(f"Student {student_name} have score {student_mark} in course {course_id_score}")
+            
 
 
 # main 
@@ -110,18 +116,18 @@ def main ():
                 print("-------------------------------------------------------------------")
             
         if options == 4 :
-            if 'num' in locals () and courses:
+            if 'num_couses' in locals():
                 for _ in range (num) : 
                     infor_couse = input_infor_course()
                     print ( infor_couse)
                     print("------------------------------------------------------------------------")
             else :  
-                print(" must put number of student , pls . ")   
+                print(" must input number of couses , please.")   
                 print("-------------------------------------------------------------------")
         
                 
         if options == 5 : 
-            if 'num' in locals() and courses:
+            if 'num' in locals() and 'num_couses' in locals() and courses and student :
                 for _ in range(num): 
                     for course in courses:
                         mark = input_mark(course[0])
@@ -150,6 +156,14 @@ def main ():
                 print("you don't put information couses ")
                 print("--------------------------------------------------------------------------")
 
+        
+        if options == 8:
+            if courses and student and mark:
+                course_id = input(" put the course id to show marks: ")
+                show_marks_for_course(course_id)
+            else:
+                print("Must input number of students, courses, and marks first, please.")
+                print("--------------------------------------------------------------------------")
 
 
 
