@@ -1,5 +1,5 @@
 # create class student
-class student :
+class Student :
     # contructor 
     def __init__(self , student_name ,student_id, student_dob)  : 
         self.name = student_name 
@@ -37,19 +37,39 @@ class courses :
     
 # class school 
 class school : 
-    def __int__ ( self ) : 
+    def __init__ ( self ) : 
         self.students = []
         self.courses = [] 
     # create array student and courses 
     
     
     #add a sutdent 
-    def add_student ( self , student_name , id , dob ) :
-        self.students.append(student(student_name , id , dob ))
+    def add_student ( self , student_name , student_id , dob ) :
+        self.students.append(Student(student_name , student_id , dob ))
     
         
     #add a courses 
-    def add_courses ( self , courses_name , id , ) : 
-        self.courses.append(courses(courses_name , id))
+    def add_courses ( self , courses_name , courses_id , ) : 
+        self.courses.append(courses(courses_name , courses_id))
         
         
+    # input mark 
+    def input_mark(self, student_id, course_id, mark):
+        for student in self.students:
+            if student.student_id == student_id:
+                for course in self.courses:
+                    if course.courses_id == course_id:
+                        student.input_mark(course, mark)
+                        course.input_mark(student, mark)
+                        break
+                break
+
+
+    def list_student( self) : 
+        for student in self.students :
+            print(student.student_id , student.student_name, student.dob )
+
+
+    def list_courses ( self):
+        for courses in self.courses:
+            print(courses.courses)        
