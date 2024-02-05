@@ -56,20 +56,78 @@ class school :
     # input mark 
     def input_mark(self, student_id, course_id, mark):
         for student in self.students:
-            if student.student_id == student_id:
+            if student.id == student_id:
                 for course in self.courses:
-                    if course.courses_id == course_id:
+                    if course.id == course_id:
                         student.input_mark(course, mark)
                         course.input_mark(student, mark)
                         break
                 break
 
-
+    
     def list_student( self) : 
         for student in self.students :
-            print(student.student_id , student.student_name, student.dob )
+            print(student.id , student.name, student.dob )
 
 
     def list_courses ( self):
         for courses in self.courses:
-            print(courses.courses)        
+            print(courses.id , courses.name)    
+            
+    
+    # print marks courses 
+    def show_marks_for_courses( self , courses_id):
+        for courses in self.courses : 
+            if courses.id == courses_id :
+                for student, scores  in courses.scores.iteam() : # student and mark in iteam  
+                    print (f" the studentv { student.name}  have scores {scores} in the courses { courses.name}") 
+      
+      
+# main 
+def main():
+    schoo = school()
+    while True:
+        print("1. Add student")
+        print("2. Add course")
+        print("3. Input mark")
+        print("4. List students")
+        print("5. List courses")
+        print("6. Show marks for a course")
+        print("7. Exit")         
+        
+        opti = int ( input(" one choose is  : ")) 
+        if opti == 1:
+            num = int(input(" input amount of student : "))
+            for _ in range ( num) : 
+                name = input( " name is : ")
+                id = input(" id is : ")
+                dob = input("dob is : ")
+                schoo.add_student(name , id , dob )
+            
+        if opti == 7 : 
+            print (" okay you are exiting.........................")
+            break 
+        
+        if opti == 2 : 
+            name = input(" name courses : ")
+            id = input("id courses id : ")
+            schoo.add_courses(name ,id , ) 
+            
+        if opti == 3 :
+            name = input(" name of student : ")
+            id = input ( " name of id : ")
+            mark = float(input(" marks is : "))
+            schoo.input_mark(name , id , mark ) 
+            
+        if opti == 4 : 
+            schoo.list_student() 
+        
+        if opti == 5 : 
+            schoo.list_courses()     
+            
+        if opti == 6 : 
+            id = ( input(" courses id is : "))
+            schoo.show_marks_for_courses (id)
+        
+if __name__ == "__main__":
+    main()
