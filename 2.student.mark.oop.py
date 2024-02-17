@@ -79,7 +79,7 @@ class school :
     def show_marks_for_courses( self , courses_id):
         for courses in self.courses : 
             if courses.id == courses_id :
-                for student, scores  in courses.scores.iteam() : # student and mark in iteam  
+                for student, scores  in courses.scores.items() : # student and mark in iteam  
                     print (f" the studentv { student.name}  have scores {scores} in the courses { courses.name}") 
       
       
@@ -114,10 +114,11 @@ def main():
             schoo.add_courses(name ,id , ) 
             
         if opti == 3 :
-            name = input(" name of student : ")
-            id = input ( " name of id : ")
+            student_id = input(" id of student : ")
+            course_id = input ( " id of course : ")
             mark = float(input(" marks is : "))
-            schoo.input_mark(name , id , mark ) 
+            schoo.input_mark(student_id , course_id , mark ) 
+ 
             
         if opti == 4 : 
             schoo.list_student() 
