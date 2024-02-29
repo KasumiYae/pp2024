@@ -5,8 +5,13 @@ class Student :
         self.name = student_name 
         self.id = student_id 
         self.dob = student_dob  
-        # array scores 
+        # array scores and courses 
         self.scores = {}
+        self.courses = []
+        
+    # add courses for student
+    def add_course( self,course):
+        self.courses.append(course)
     
     #input 
     def input_mark ( self , courses ,  mark) : 
@@ -27,7 +32,7 @@ class courses :
         self.scores = {} 
     
     # input 
-    def input_markj ( self , student , mark ) :
+    def input_mark ( self , student , mark ) :
         self.scores[student] = mark 
     
     #get 
@@ -40,6 +45,7 @@ class school :
     def __init__ ( self ) : 
         self.students = []
         self.courses = [] 
+        self.score = []
     # create array student and courses 
     
     
@@ -49,9 +55,13 @@ class school :
     
         
     #add a courses 
-    def add_courses ( self , courses_name , courses_id , ) : 
-        self.courses.append(courses(courses_name , courses_id))
+    def add_courses ( self , student_id , courses_name , courses_id  ) : 
+        new_course = courses( courses_id , courses_name )
+        self.courses.append(new_course)
         
+        for student in self.students : 
+            if student.id == student_id : 
+                student.add_course(new_course)
         
     # input mark 
     def input_mark(self, student_id, course_id, mark):
@@ -77,11 +87,10 @@ class school :
     
     # print marks courses 
     def show_marks_for_courses( self , courses_id):
-        for courses in self.courses : 
-            if courses.id == courses_id :
-                for student, scores  in courses.scores.items() : # student and mark in iteam  
-                    print (f" the studentv { student.name}  have scores {scores} in the courses { courses.name}") 
-      
+        for student in self.students : 
+            for course in student.courses : 
+                if course.id == courses_id: 
+                    print(f" student {student.name} has score {student.get_mark(course)} in course {course.name}")
       
 # main 
 def main():
@@ -109,9 +118,10 @@ def main():
             break 
         
         if opti == 2 : 
-            name = input(" name courses : ")
-            id = input("id courses id : ")
-            schoo.add_courses(name ,id , ) 
+            student_id = input( " id student : ")
+            name = input ("name course : ")
+            id = input ( " id course: ")
+            schoo.add_courses(student_id , name , id )
             
         if opti == 3 :
             student_id = input(" id of student : ")
