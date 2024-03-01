@@ -15,7 +15,7 @@ class Student :
     def add_course( self,course):
         self.courses.append(course)
     
-    #input 
+    #input_mark
     def input_mark ( self , courses ,  mark) : 
         self.scores[courses ] = math.floor((mark * 10 ) / 10 )  # 1-digit decimal upon input
         
@@ -27,8 +27,17 @@ class Student :
     # GPA 
     def gpa (self , mark ) : 
         if self.scores() : 
-            np.mean(list(self.scores.values))
+            return np.mean(list(self.scores.values)) # Show list values scores ==> average 
         else: 
+            return 0 
+    
+    # GPA weight 
+    def gpa_weight ( self, course_tinchi):
+        if self.scores and course_tinchi : 
+            total_tinchi = sum(course_tinchi.values())
+            total_score  = sum(self.scores[course] for course in self.scores ) # loop course what student activite and scores of it 
+            return total_score / total_tinchi if total_tinchi else 0  # if tinchi == 0 ==> error 
+        else : 
             return 0 
     
 # create class courses 
@@ -110,7 +119,8 @@ def main():
         print("4. List students")
         print("5. List courses")
         print("6. Show marks for a course")
-        print("7. Exit")         
+        print("7: Average GPA ")
+        print("0. Exit")         
         
         opti = int ( input(" one choose is  : ")) 
         if opti == 1:
@@ -121,7 +131,7 @@ def main():
                 dob = input("dob is : ")
                 schoo.add_student(name , id , dob )
             
-        if opti == 7 : 
+        if opti == 0 : 
             print (" okay you are exiting.........................")
             break 
         
@@ -136,7 +146,6 @@ def main():
             course_id = input ( " id of course : ")
             mark = float(input(" marks is : "))
             schoo.input_mark(student_id , course_id , mark ) 
- 
             
         if opti == 4 : 
             schoo.list_student() 
@@ -147,6 +156,7 @@ def main():
         if opti == 6 : 
             id = ( input(" courses id is : "))
             schoo.show_marks_for_courses (id)
+        
         
 if __name__ == "__main__":
     main()
