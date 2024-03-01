@@ -26,8 +26,8 @@ class Student :
     
     # GPA 
     def gpa (self , mark ) : 
-        if self.scores() : 
-            return np.mean(list(self.scores.values)) # Show list values scores ==> average 
+        if self.scores : 
+            return np.mean(list(self.scores.values())) # Show list values scores ==> average 
         else: 
             return 0 
     
@@ -108,10 +108,16 @@ class school :
             for course in student.courses : 
                 if course.id == courses_id: 
                     print(f" student {student.name} has score {student.get_mark(course)} in course {course.name}")
-      
+    
+    # sort student by gpa ( key=lambda variable: variable[0] )
+    def sort_student(self) : 
+        self.students.sort( key=lambda student:student.gpa , reverse=True) 
+    
+    
 # main 
 def main():
     schoo = school()
+    course_tinchi = {}
     while True:
         print("1. Add student")
         print("2. Add course")
@@ -119,7 +125,6 @@ def main():
         print("4. List students")
         print("5. List courses")
         print("6. Show marks for a course")
-        print("7: Average GPA ")
         print("0. Exit")         
         
         opti = int ( input(" one choose is  : ")) 
@@ -156,6 +161,7 @@ def main():
         if opti == 6 : 
             id = ( input(" courses id is : "))
             schoo.show_marks_for_courses (id)
+        
         
         
 if __name__ == "__main__":
